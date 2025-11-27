@@ -1,4 +1,4 @@
-package com.example.myapp
+package com.app.vcdashboard
 
 import io.flutter.embedding.android.FlutterActivity
 

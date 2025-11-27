@@ -52,32 +52,30 @@ class _WebViewScreenState extends State<WebViewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('VCQRU Dashboard'),
-        elevation: 0,
-        centerTitle: true,
-      ),
-      body: Stack(
-        children: [
-          InAppWebView(
-            initialUrlRequest: URLRequest(url: WebUri(_url)),
-            onWebViewCreated: (controller) {
-              _webViewController = controller;
-            },
-            pullToRefreshController: _pullToRefreshController,
-            onProgressChanged: (controller, progress) {
-              setState(() {
-                _progress = progress / 100;
-              });
-            },
-            onLoadStop: (controller, url) {
-              _pullToRefreshController.endRefreshing();
-            },
-          ),
-          if (_progress < 1.0)
-            LinearProgressIndicator(value: _progress),
-        ],
+    return SafeArea(
+      child: Scaffold(
+      
+        body: Stack(
+          children: [
+            InAppWebView(
+              initialUrlRequest: URLRequest(url: WebUri(_url)),
+              onWebViewCreated: (controller) {
+                _webViewController = controller;
+              },
+              pullToRefreshController: _pullToRefreshController,
+              onProgressChanged: (controller, progress) {
+                setState(() {
+                  _progress = progress / 100;
+                });
+              },
+              onLoadStop: (controller, url) {
+                _pullToRefreshController.endRefreshing();
+              },
+            ),
+            if (_progress < 1.0)
+              LinearProgressIndicator(value: _progress),
+          ],
+        ),
       ),
     );
   }
